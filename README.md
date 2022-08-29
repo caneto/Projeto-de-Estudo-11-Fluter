@@ -1,6 +1,6 @@
 # animacoescomplexas
 
-Animações Complexas
+Animacoes Complexas
 
 ## Getting Started
 
