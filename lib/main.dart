@@ -36,11 +36,14 @@ class _LoginApp extends State<LoginApp> with SingleTickerProviderStateMixin {
     );
 
     animation = Tween<double>(begin: 0, end: 300).animate(controller);
-    animation.addListener(() {
-      setState(() {
-
-      });
+    animation.addStatusListener((status) {
+      if(status == AnimationStatus.completed) {
+        controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        controller.forward();
+      }
     });
+
     controller.forward();
   }
 
@@ -52,6 +55,19 @@ class _LoginApp extends State<LoginApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    return AnimatedLogo(animation);
+  }
+}
+
+
+class AnimatedLogo extends AnimatedWidget {
+  final Animation<double> animation;
+
+  AnimatedLogo(Animation<double> this.animation) : super(listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+
     return Center(
       child: Container(
         height: animation.value,
@@ -60,4 +76,5 @@ class _LoginApp extends State<LoginApp> with SingleTickerProviderStateMixin {
       ),
     );
   }
+  
 }
